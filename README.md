@@ -1,6 +1,6 @@
 # proxycheap.js
 
-[![axios](https://img.shields.io/github/package-json/dependency-version/LockBlock-dev/proxycheap.js/axios)](https://www.npmjs.com/package/axios)
+[![axios](https://img.shields.io/github/package-json/dependency-version/LockBlock-dev/proxycheap.js/axios)](https://www.npmjs.com/package/axios) [![cheerio](https://img.shields.io/github/package-json/dependency-version/LockBlock-dev/proxycheap.js/cheerio)](https://www.npmjs.com/package/cheerio)
 
 [![GitHub stars](https://img.shields.io/github/stars/LockBlock-dev/proxycheap.js.svg)](https://github.com/LockBlock-dev/proxycheap.js/stargazers) ![npm](https://img.shields.io/npm/dm/proxycheap.js)
 
