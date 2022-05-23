@@ -1,6 +1,7 @@
 const axios = require("axios").default;
 const cheerio = require("cheerio");
 const errors = require("./errors");
+const pkg = require("../package.json");
 
 exports.Client = class Client {
     constructor() {
@@ -12,7 +13,7 @@ exports.Client = class Client {
     }
 
     #headers = {
-        //"User-Agent": `proxycheap.js ${require("../package.json").version} (https://github.com/LockBlock-dev/proxycheap.js)`,
+        //"User-Agent": `proxycheap.js ${pkg.version} (https://github.com/LockBlock-dev/proxycheap.js)`,
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0",
         Accept: "*",
     };
