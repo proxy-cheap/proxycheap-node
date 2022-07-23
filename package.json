@@ -1,6 +1,6 @@
 {
     "name": "proxycheap.js",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "A JavaScript library for interacting with the proxy-cheap API",
     "main": "./src/client.js",
     "exports": {
@@ -8,8 +8,10 @@
         "import": "./esm/wrapper.js"
     },
     "dependencies": {
-        "axios": "^0.21.4",
-        "cheerio": "^1.0.0-rc.10"
+        "axios": "^0.27.2"
+    },
+    "scripts": {
+        "doc": "npx jsdoc2md src/*.js > API.md"
     },
     "repository": {
         "type": "git",
@@ -25,5 +27,8 @@
         "proxycheap",
         "proxies",
         "API"
-    ]
+    ],
+    "devDependencies": {
+        "jsdoc-to-markdown": "^7.1.1"
+    }
 }

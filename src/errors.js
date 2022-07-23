@@ -19,9 +19,7 @@ class BaseError extends Error {
     }
 }
 
-exports.BaseError = BaseError;
-
-exports.FatalError = class FatalError extends BaseError {
+class FatalError extends BaseError {
     /**
      * Represents a fatal error from the Client : `"FatalError"`.
      * @extends BaseError
@@ -36,9 +34,9 @@ exports.FatalError = class FatalError extends BaseError {
             this.stack = errObject.stack;
         }
     }
-};
+}
 
-exports.APIError = class APIError extends BaseError {
+class APIError extends BaseError {
     /**
      * Represents an error from the API : `"APIError"`.
      * @extends BaseError
@@ -56,5 +54,41 @@ exports.APIError = class APIError extends BaseError {
         this.status = status;
         this.method = method;
         this.url = url;
+        this.data = response.data;
     }
-};
+}
+
+class ParseError extends BaseError {
+    /**
+     * Represents a parsing error : `"ParseError"`.
+     * @extends BaseError
+     * @constructor
+     * @param {String} message error message
+     * @param {String} status status type of the request
+     * @param {String} method method used for the request
+     * @param {String} url url of the request to the endpoint
+     */
+    constructor(message, status, method, url) {
+        super("ParseError", message);
+
+        /**
+         * status type of the request
+         * @type {string}
+         */
+        this.status = status;
+
+        /**
+         * method used for the request
+         * @type {string}
+         */
+        this.method = method;
+
+        /**
+         * url of the request to the endpoint
+         * @type {string}
+         */
+        this.url = url;
+    }
+}
+
+module.exports = { FatalError, APIError, ParseError };

@@ -1,6 +1,6 @@
 # proxycheap.js
 
-[![axios](https://img.shields.io/github/package-json/dependency-version/LockBlock-dev/proxycheap.js/axios)](https://www.npmjs.com/package/axios) [![cheerio](https://img.shields.io/github/package-json/dependency-version/LockBlock-dev/proxycheap.js/cheerio)](https://www.npmjs.com/package/cheerio)
+[![axios](https://img.shields.io/github/package-json/dependency-version/LockBlock-dev/proxycheap.js/axios)](https://www.npmjs.com/package/axios)
 
 [![GitHub stars](https://img.shields.io/github/stars/LockBlock-dev/proxycheap.js.svg)](https://github.com/LockBlock-dev/proxycheap.js/stargazers) ![npm](https://img.shields.io/npm/dm/proxycheap.js)
 
@@ -41,24 +41,23 @@ See the [changelog](/CHANGELOG.md)
 
 The library can be used in both CommonJS and ES Modules
 
-### Using the library - API
+### Using the library
+
+**Create an API key [here](https://app.proxy-cheap.com/account/security/api-keys).**
 
 ```js
 const { Client } = require("proxycheap.js");
 //OR
 import { Client } from "proxycheap.js";
 
-const client = new Client();
+const client = new Client("API_KEY", "API_SECRET");
 
-client.login("PHPSESSID").then((data) => {
-    client.balance().then((balance) => console.log(balance));
-});
+client.balance().then((data) => console.log(data.balance));
 
 //OR
 
 const myFunc = async () => {
-    await client.login("PHPSESSID");
-    const balance = await client.balance();
+    const { balance } = await client.balance();
     console.log(balance);
 };
 
