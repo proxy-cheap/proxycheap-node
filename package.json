@@ -1,6 +1,6 @@
 {
     "name": "proxycheap.js",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "A JavaScript library for interacting with the proxy-cheap API",
     "main": "./src/client.js",
     "exports": {

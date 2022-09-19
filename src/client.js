@@ -149,7 +149,7 @@ class Client {
     /**
      * Buy additional bandwidth for a proxy.
      * @param {number} id proxy id
-     * @param {number} amount
+     * @param {number} amount in GB
      * @example client.buyBandwidth(12345, 5)
      * @return {Promise<Object>}
      */
@@ -158,6 +158,61 @@ class Client {
 
         return this.#request("GET", `proxies/${id}/buy-bandwidth`, {
             data: { bandwidth: amount },
+        });
+    }
+
+    /**
+     * Get configuration according to filter parameters.
+     * @param {Object} [config = {}]
+     * @param {string} config.networkType MOBILE, DATACENTER, RESIDENTIAL, RESIDENTIAL_STATIC
+     * @param {string} config.ipVersion IPv4, IPv6, MOBILE
+     * @param {string} config.country 2 letter country code
+     * @param {string} config.region 2 letter region code
+     * @param {string} config.isp ISP id
+     * @param {string} config.proxyProtocol HTTP, HTTPS, SOCKS5
+     * @param {string} config.authenticationType USERNAME_PASSWORD, IP_WHITELIST
+     * - In case of username/password auth, they will be auto-generated during the ordering process.
+     * @param {Array} config.ipWhitelist whitelisted IPs: [ "1.1.1.1", ... ]
+     * @param {string} config.package package id
+     * @param {number} config.quantity proxies amount
+     * @param {string} config.couponCode order promo code
+     * @param {number} config.bandwidth amount in GB
+     * @param {boolean} config.isAutoExtendEnabled enables auto extend
+     * @param {number} config.autoExtendBandwidth how many GB to extend
+     * @example client.configuration({ "networkType": "MOBILE", "country": "US" })
+     * @return {Promise<Object>}
+     */
+    configuration(body = {}) {
+        return this.#request("POST", "order/configuration", {
+            data: body,
+        });
+    }
+
+    /**
+     * Execute the order with the given configuration.
+     * @param {Object} [config = {}]
+     * @param {string} config.networkType MOBILE, DATACENTER, RESIDENTIAL, RESIDENTIAL_STATIC
+     * @param {string} config.ipVersion IPv4, IPv6, MOBILE
+     * @param {string} config.country 2 letter country code
+     * @param {string} config.region 2 letter region code
+     * @param {string} config.isp ISP id
+     * @param {string} config.proxyProtocol HTTP, HTTPS, SOCKS5
+     * @param {string} config.authenticationType USERNAME_PASSWORD, IP_WHITELIST
+     * - In case of username/password auth, they will be auto-generated during the ordering process.
+     * @param {Array} config.ipWhitelist whitelisted IPs: [ "1.1.1.1", ... ]
+     * @param {string} config.package package id
+     * @param {number} config.quantity proxies amount
+     * @param {string} config.couponCode order promo code
+     * @param {number} config.bandwidth amount in GB
+     * @param {boolean} config.isAutoExtendEnabled enables auto extend
+     * @param {number} config.autoExtendBandwidth how many GB to extend
+     * @example client.order({ "networkType": "MOBILE", "country": "US" })
+     * Check your configuration with client.configuration before
+     * @return {Promise<Object>}
+     */
+    order(body = {}) {
+        return this.#request("POST", "order/execute", {
+            data: body,
         });
     }
 }

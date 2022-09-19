@@ -27,6 +27,8 @@
     * [.changeWhitelist(id, ips)](#Client+changeWhitelist) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.extend(id, months)](#Client+extend) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.buyBandwidth(id, amount)](#Client+buyBandwidth) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.configuration([config])](#Client+configuration) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.order([config])](#Client+order) ⇒ <code>Promise.&lt;Object&gt;</code>
 
 <a name="new_Client_new"></a>
 
@@ -138,11 +140,69 @@ Buy additional bandwidth for a proxy.
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>number</code> | proxy id |
-| amount | <code>number</code> |  |
+| amount | <code>number</code> | in GB |
 
 **Example**  
 ```js
 client.buyBandwidth(12345, 5)
+```
+<a name="Client+configuration"></a>
+
+### client.configuration([config]) ⇒ <code>Promise.&lt;Object&gt;</code>
+Get configuration according to filter parameters.
+
+**Kind**: instance method of [<code>Client</code>](#Client)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [config] | <code>Object</code> | <code>{}</code> |  |
+| config.networkType | <code>string</code> |  | MOBILE, DATACENTER, RESIDENTIAL, RESIDENTIAL_STATIC |
+| config.ipVersion | <code>string</code> |  | IPv4, IPv6, MOBILE |
+| config.country | <code>string</code> |  | 2 letter country code |
+| config.region | <code>string</code> |  | 2 letter region code |
+| config.isp | <code>string</code> |  | ISP id |
+| config.proxyProtocol | <code>string</code> |  | HTTP, HTTPS, SOCKS5 |
+| config.authenticationType | <code>string</code> |  | USERNAME_PASSWORD, IP_WHITELIST - In case of username/password auth, they will be auto-generated during the ordering process. |
+| config.ipWhitelist | <code>Array</code> |  | whitelisted IPs: [ "1.1.1.1", ... ] |
+| config.package | <code>string</code> |  | package id |
+| config.quantity | <code>number</code> |  | proxies amount |
+| config.couponCode | <code>string</code> |  | order promo code |
+| config.bandwidth | <code>number</code> |  | amount in GB |
+| config.isAutoExtendEnabled | <code>boolean</code> |  | enables auto extend |
+| config.autoExtendBandwidth | <code>number</code> |  | how many GB to extend |
+
+**Example**  
+```js
+client.configuration({ "networkType": "MOBILE", "country": "US" })
+```
+<a name="Client+order"></a>
+
+### client.order([config]) ⇒ <code>Promise.&lt;Object&gt;</code>
+Execute the order with the given configuration.
+
+**Kind**: instance method of [<code>Client</code>](#Client)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [config] | <code>Object</code> | <code>{}</code> |  |
+| config.networkType | <code>string</code> |  | MOBILE, DATACENTER, RESIDENTIAL, RESIDENTIAL_STATIC |
+| config.ipVersion | <code>string</code> |  | IPv4, IPv6, MOBILE |
+| config.country | <code>string</code> |  | 2 letter country code |
+| config.region | <code>string</code> |  | 2 letter region code |
+| config.isp | <code>string</code> |  | ISP id |
+| config.proxyProtocol | <code>string</code> |  | HTTP, HTTPS, SOCKS5 |
+| config.authenticationType | <code>string</code> |  | USERNAME_PASSWORD, IP_WHITELIST - In case of username/password auth, they will be auto-generated during the ordering process. |
+| config.ipWhitelist | <code>Array</code> |  | whitelisted IPs: [ "1.1.1.1", ... ] |
+| config.package | <code>string</code> |  | package id |
+| config.quantity | <code>number</code> |  | proxies amount |
+| config.couponCode | <code>string</code> |  | order promo code |
+| config.bandwidth | <code>number</code> |  | amount in GB |
+| config.isAutoExtendEnabled | <code>boolean</code> |  | enables auto extend |
+| config.autoExtendBandwidth | <code>number</code> |  | how many GB to extend |
+
+**Example**  
+```js
+client.order({ "networkType": "MOBILE", "country": "US" })Check your configuration with client.configuration before
 ```
 <a name="FatalError"></a>
 
