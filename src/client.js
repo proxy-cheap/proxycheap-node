@@ -121,14 +121,16 @@ class Client {
     /**
      * Change whitelisted IPs of a proxy.
      * @param {number} id proxy id
-     * @param {Array} ips
-     * @example client.changeWhitelist(12345, ["0.0.0.0", "1.1.1.1", "2.2.2.2"])
+     * @param {Array} [ips = []]
+     * @example client.whitelist(12345, ["0.0.0.0", "1.1.1.1", "2.2.2.2"])
      * @return {Promise<Object>}
      */
-    changeWhitelist(id, ips) {
-        if (!ips || ips.length < 1) throw new Error("You must provide at least 1 IP!");
-
-        throw new Error("Not implemented yet!");
+    whitelist(id, ips = []) {
+        return this.#request("GET", `proxies/${id}/whitelist-ip`, {
+            data: {
+                ips: ips,
+            },
+        });
     }
 
     /**
@@ -214,6 +216,23 @@ class Client {
         return this.#request("POST", "order/execute", {
             data: body,
         });
+    }
+
+    /**
+     * Enable or disable auto-extend of a proxy.
+     * @param {number} id proxy id
+     * @param {bool} [enabled = true]
+     * @example client.autoExtend(12345, true)
+     * @return {Promise<Object>}
+     */
+    autoExtend(id, enabled = true) {
+        if (typeof enabled !== "boolean") throw new Error("Parameter 'enabled' must be a boolean");
+
+        if (enabled) {
+            return this.#request("POST", `proxies/${id}/auto-extend/enable`);
+        } else {
+            return this.#request("POST", `proxies/${id}/auto-extend/disable`);
+        }
     }
 }
 

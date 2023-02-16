@@ -24,11 +24,12 @@
     * [.balance()](#Client+balance) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.proxies()](#Client+proxies) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.proxy(id)](#Client+proxy) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.changeWhitelist(id, ips)](#Client+changeWhitelist) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.whitelist(id, [ips])](#Client+whitelist) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.extend(id, months)](#Client+extend) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.buyBandwidth(id, amount)](#Client+buyBandwidth) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.configuration([config])](#Client+configuration) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.order([config])](#Client+order) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.autoExtend(id, [enabled])](#Client+autoExtend) ⇒ <code>Promise.&lt;Object&gt;</code>
 
 <a name="new_Client_new"></a>
 
@@ -98,21 +99,21 @@ Get info on a proxy.
 ```js
 client.proxy(12345)
 ```
-<a name="Client+changeWhitelist"></a>
+<a name="Client+whitelist"></a>
 
-### client.changeWhitelist(id, ips) ⇒ <code>Promise.&lt;Object&gt;</code>
+### client.whitelist(id, [ips]) ⇒ <code>Promise.&lt;Object&gt;</code>
 Change whitelisted IPs of a proxy.
 
 **Kind**: instance method of [<code>Client</code>](#Client)  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| id | <code>number</code> | proxy id |
-| ips | <code>Array</code> |  |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| id | <code>number</code> |  | proxy id |
+| [ips] | <code>Array</code> | <code>[]</code> |  |
 
 **Example**  
 ```js
-client.changeWhitelist(12345, ["0.0.0.0", "1.1.1.1", "2.2.2.2"])
+client.whitelist(12345, ["0.0.0.0", "1.1.1.1", "2.2.2.2"])
 ```
 <a name="Client+extend"></a>
 
@@ -203,6 +204,22 @@ Execute the order with the given configuration.
 **Example**  
 ```js
 client.order({ "networkType": "MOBILE", "country": "US" })Check your configuration with client.configuration before
+```
+<a name="Client+autoExtend"></a>
+
+### client.autoExtend(id, [enabled]) ⇒ <code>Promise.&lt;Object&gt;</code>
+Enable or disable auto-extend of a proxy.
+
+**Kind**: instance method of [<code>Client</code>](#Client)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| id | <code>number</code> |  | proxy id |
+| [enabled] | <code>bool</code> | <code>true</code> |  |
+
+**Example**  
+```js
+client.autoExtend(12345, true)
 ```
 <a name="FatalError"></a>
 
