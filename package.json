@@ -8,7 +8,7 @@
         "import": "./esm/wrapper.js"
     },
     "dependencies": {
-        "axios": "^0.28.0"
+        "axios": "^1.13.5"
     },
     "scripts": {
         "doc": "jsdoc2md src/*.js > API.md"
